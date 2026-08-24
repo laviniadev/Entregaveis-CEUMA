@@ -1,0 +1,32 @@
+CREATE TABLE hospede (
+    id_hospede INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) UNIQUE NOT NULL,
+    email VARCHAR(100),
+    telefone VARCHAR(20)
+);
+
+CREATE TABLE quarto (
+    id_quarto INT PRIMARY KEY,
+    numero VARCHAR(10) NOT NULL,
+    tipo VARCHAR(50),
+    capacidade INT,
+    valor_diaria DECIMAL(10,2),
+    status VARCHAR(30)
+);
+
+CREATE TABLE reserva (
+    id_reserva INT PRIMARY KEY,
+    id_hospede INT NOT NULL,
+    id_quarto INT NOT NULL,
+    data_checkin DATE NOT NULL,
+    data_checkout DATE NOT NULL,
+    quantidade_hospedes INT,
+    status VARCHAR(30),
+
+    FOREIGN KEY (id_hospede)
+        REFERENCES hospede(id_hospede),
+
+    FOREIGN KEY (id_quarto)
+        REFERENCES quarto(id_quarto)
+);
